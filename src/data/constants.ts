@@ -102,6 +102,7 @@ export const SKILLS: Record<SkillNames, Skill> = {
 // ─── EXPERIENCE ─────────────────────────────────────────────────────────────
 
 export type Experience = {
+  id: string;
   title: string;
   company: string;
   period: string;
@@ -111,6 +112,7 @@ export type Experience = {
 
 export const EXPERIENCE: Experience[] = [
   {
+    id: "airsense",
     title: "AI/ML Engineer",
     company: "AirSense — Applied AI Solutions",
     period: "2024 – Present",
@@ -124,6 +126,7 @@ export const EXPERIENCE: Experience[] = [
     skills: ["Python", "FastAPI", "MLflow", "Prefect", "Docker", "Scikit-learn"],
   },
   {
+    id: "debate-ai",
     title: "NLP Developer",
     company: "Debate AI — Hack and Connect, Netronix Society GIKI",
     period: "2024",
