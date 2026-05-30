@@ -7,9 +7,10 @@ const config = {
   keywords: ["Mohsin Saeed", "AI Engineer", "MLOps", "NLP", "Machine Learning", "GIKI", "Python", "FastAPI", "PyTorch"],
   author: "Mohsin Saeed",
   email: "marboo786@gmail.com",
-  site: "https://your-vercel-url.vercel.app", // update after deploying
+  site: "https://your-vercel-url.vercel.app",
   githubUsername: "marbo786",
-  githubRepo: "3d-portfolio",
+  githubRepo: "Portfolio101",
+  resume: "https://drive.google.com/file/d/1gvvk3wS-KBfuFLZP339E5bPEvskdKcrS/view?usp=sharing",
   get ogImg() {
     return this.site + "/assets/seo/og-image.png";
   },
@@ -21,5 +22,4 @@ const config = {
     github: "https://github.com/marbo786",
   },
 };
-
 export { config };
