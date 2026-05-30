@@ -283,10 +283,39 @@ const AnimatedBackground = () => {
     setupScrollAnimations();
     bongoAnimationRef.current = getBongoAnimation();
     keycapAnimationsRef.current = getKeycapsAnimation();
+
+    // Listen to custom "select-skill" event from HTML interactive keyboard
+    const handleSelectSkill = (e: Event) => {
+      const detail = (e as CustomEvent).detail;
+      const skillName = detail.skillName as SkillNames;
+      const threeDKey = detail.threeDKey;
+
+      const skill = SKILLS[skillName];
+      if (skill) {
+        setSelectedSkill(skill);
+        selectedSkillRef.current = skill;
+
+        // Set Spline text readouts
+        splineApp.setVariable("heading", skill.label);
+        splineApp.setVariable("desc", skill.shortDescription);
+
+        // Physically depress the corresponding 3D keycap
+        const keycap = splineApp.findObjectByName(threeDKey);
+        if (keycap) {
+          gsap.timeline()
+            .to(keycap.position, { y: 25, duration: 0.08, ease: "power1.in" })
+            .to(keycap.position, { y: 50, duration: 0.15, ease: "bounce.out" });
+        }
+      }
+    };
+
+    window.addEventListener("select-skill", handleSelectSkill);
+
     return () => {
-      bongoAnimationRef.current?.stop()
-      keycapAnimationsRef.current?.stop()
-    }
+      bongoAnimationRef.current?.stop();
+      keycapAnimationsRef.current?.stop();
+      window.removeEventListener("select-skill", handleSelectSkill);
+    };
 
   }, [splineApp, isMobile]);
 

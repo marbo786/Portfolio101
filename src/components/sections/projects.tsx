@@ -4,6 +4,9 @@ import { TypographyH3, TypographyP } from "@/components/ui/typography";
 import { ArrowUpRight } from "lucide-react";
 import Link from "next/link";
 import { ReactNode } from "react";
+import { Modal, ModalBody, ModalContent, ModalTrigger } from "../ui/animated-modal";
+import SectionWrapper from "../ui/section-wrapper";
+import { SectionHeader } from "./section-header";
 import {
   SiDocker,
   SiFastapi,
@@ -345,4 +348,109 @@ const projects: Project[] = [
   },
 ];
 
-export default projects;
+const ProjectsSection = () => {
+  return (
+    <SectionWrapper id="projects" className="flex flex-col items-center justify-center min-h-screen py-20 z-10 relative">
+      <div className="w-full max-w-6xl px-4 md:px-8 mx-auto">
+        <SectionHeader
+          id="projects"
+          title="Projects"
+          desc="Showcasing my technical creations."
+          className="mb-12 md:mb-20 mt-0"
+        />
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+          {projects.map((project, idx) => (
+            <ProjectCard key={project.id} project={project} index={idx} />
+          ))}
+        </div>
+      </div>
+    </SectionWrapper>
+  );
+};
+
+const ProjectCard = ({ project, index }: { project: Project; index: number }) => {
+  return (
+    <Modal>
+      <div className="bg-slate-900/40 backdrop-blur-md border border-slate-800 hover:border-slate-700/80 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 shadow-lg hover:shadow-xl flex flex-col justify-between h-full min-h-[380px]">
+        <div className="flex flex-col gap-4">
+          {/* Card Head */}
+          <div className="flex justify-between items-center">
+            <span className="font-mono text-xs uppercase tracking-wider text-slate-500">
+              {project.category}
+            </span>
+          </div>
+
+          {/* Title */}
+          <h3 className="font-mono font-bold text-2xl text-white mt-1">
+            {project.title}
+          </h3>
+
+          {/* Description Snippet */}
+          <div className="text-slate-400 text-sm font-mono mt-2 leading-relaxed">
+            {project.id === "airsense" && "Production-grade MLOps system processing 420K+ air quality records."}
+            {project.id === "debateai" && "NLP system that auto-generates structured debate arguments."}
+            {project.id === "marcode" && "Hybrid plagiarism detection with WASM acceleration."}
+            {project.id === "lenet5" && "Real-time handwritten digit classification using PyTorch."}
+            {project.id === "ssad" && "ML-powered sports analytics dashboard with interactive plots."}
+            {project.id === "research-summarizer" && "Model-agnostic research paper summarization pipeline."}
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-4 mt-6">
+          {/* Tech Badges */}
+          <div className="flex flex-wrap gap-1.5">
+            {project.skills.frontend.map((s, i) => (
+              <span 
+                key={i} 
+                className="px-2 py-0.5 rounded bg-slate-950/60 border border-slate-850 font-mono text-[10px] text-slate-400 flex items-center gap-1"
+              >
+                <span className="text-[12px] opacity-80">{s.icon}</span>
+                {s.title}
+              </span>
+            ))}
+            {project.skills.backend.map((s, i) => (
+              <span 
+                key={i} 
+                className="px-2 py-0.5 rounded bg-slate-950/60 border border-slate-850 font-mono text-[10px] text-slate-400 flex items-center gap-1"
+              >
+                <span className="text-[12px] opacity-80">{s.icon}</span>
+                {s.title}
+              </span>
+            ))}
+          </div>
+
+          {/* Modal Trigger Button */}
+          <ModalTrigger className="w-full bg-slate-850 hover:bg-slate-800 text-white font-mono text-sm border border-slate-800 transition-colors py-2.5 rounded-xl flex items-center justify-center gap-2 mt-2">
+            Explore Project
+            <ArrowUpRight className="w-4 h-4 text-slate-400" />
+          </ModalTrigger>
+        </div>
+      </div>
+
+      <ModalBody className="max-w-[90%] md:max-w-[70%] lg:max-w-[50%] bg-slate-950/95 border border-slate-800 md:rounded-2xl shadow-2xl relative">
+        <ModalContent className="p-6 md:p-10 text-white">
+          <div className="flex flex-col gap-6">
+            <div className="flex justify-between items-start border-b border-slate-800 pb-4">
+              <div>
+                <span className="font-mono text-xs uppercase tracking-wider text-slate-500">
+                  {project.category}
+                </span>
+                <h2 className="font-mono font-bold text-3xl mt-1 text-white">
+                  {project.title}
+                </h2>
+              </div>
+            </div>
+            
+            {/* Custom content */}
+            <div className="font-mono text-slate-350 leading-relaxed text-sm">
+              {project.content}
+            </div>
+          </div>
+        </ModalContent>
+      </ModalBody>
+    </Modal>
+  );
+};
+
+export default ProjectsSection;
