@@ -1,140 +1,348 @@
-"use client";
-import Image from "next/image";
-import React from "react";
-import {
-  ResponsiveDialog,
-  ResponsiveDialogContent,
-  ResponsiveDialogTrigger,
-} from "../ui/responsive-dialog";
-import { FloatingDock } from "../ui/floating-dock";
-import { ScrollArea } from "../ui/scroll-area";
-import Link from "next/link";
+import SlideShow from "@/components/slide-show";
+import { Button } from "@/components/ui/button";
+import { TypographyH3, TypographyP } from "@/components/ui/typography";
 import { ArrowUpRight } from "lucide-react";
-import { motion } from "motion/react";
+import Link from "next/link";
+import { ReactNode } from "react";
+import {
+  SiDocker,
+  SiFastapi,
+  SiPython,
+  SiScikitlearn,
+  SiStreamlit,
+  SiTypescript,
+  SiPlotly,
+} from "react-icons/si";
 
-import projects, { Project } from "@/data/projects";
-import { SectionHeader } from "./section-header";
-
-import SectionWrapper from "../ui/section-wrapper";
-
-const ProjectsSection = () => {
-  return (
-    <SectionWrapper id="projects" className="max-w-7xl mx-auto md:h-[130vh]">
-      <SectionHeader id="projects" title="Projects" />
-      <div className="grid grid-cols-1 md:grid-cols-3">
-        {projects.map((project) => (
-          <ProjectCard key={project.id} project={project} />
-        ))}
-      </div>
-    </SectionWrapper>
-  );
+export type Skill = {
+  title: string;
+  bg: string;
+  fg: string;
+  icon: ReactNode;
 };
 
-const ProjectCard = ({ project }: { project: Project }) => {
+const PROJECT_SKILLS = {
+  python: { title: "Python", bg: "black", fg: "white", icon: <SiPython /> },
+  fastapi: { title: "FastAPI", bg: "black", fg: "white", icon: <SiFastapi /> },
+  docker: { title: "Docker", bg: "black", fg: "white", icon: <SiDocker /> },
+  sklearn: { title: "Scikit-learn", bg: "black", fg: "white", icon: <SiScikitlearn /> },
+  streamlit: { title: "Streamlit", bg: "black", fg: "white", icon: <SiStreamlit /> },
+  typescript: { title: "TypeScript", bg: "black", fg: "white", icon: <SiTypescript /> },
+  plotly: { title: "Plotly", bg: "black", fg: "white", icon: <SiPlotly /> },
+  mlflow: {
+    title: "MLflow",
+    bg: "black",
+    fg: "white",
+    icon: <span style={{ fontWeight: "bold", fontSize: "0.7rem" }}>ML</span>,
+  },
+  prefect: {
+    title: "Prefect",
+    bg: "black",
+    fg: "white",
+    icon: <span style={{ fontWeight: "bold", fontSize: "0.7rem" }}>PF</span>,
+  },
+  pytorch: {
+    title: "PyTorch",
+    bg: "black",
+    fg: "white",
+    icon: <span style={{ fontWeight: "bold", fontSize: "0.7rem" }}>PT</span>,
+  },
+  llm: {
+    title: "LLMs",
+    bg: "black",
+    fg: "white",
+    icon: <span style={{ fontWeight: "bold", fontSize: "0.7rem" }}>LLM</span>,
+  },
+  wasm: {
+    title: "WASM",
+    bg: "black",
+    fg: "white",
+    icon: <span style={{ fontWeight: "bold", fontSize: "0.7rem" }}>WA</span>,
+  },
+  dash: {
+    title: "Dash",
+    bg: "black",
+    fg: "white",
+    icon: <span style={{ fontWeight: "bold", fontSize: "0.7rem" }}>DA</span>,
+  },
+};
+
+const ProjectsLinks = ({ live, repo }: { live: string; repo?: string }) => {
   return (
-    <div className="flex items-center justify-center">
-      <ResponsiveDialog>
-        <ResponsiveDialogTrigger className="bg-transparent flex justify-center">
-          <div
-            className="relative w-[400px] h-auto rounded-lg overflow-hidden"
-            style={{ aspectRatio: "3/2" }}
-          >
-            <Image
-              className="absolute w-full h-full top-0 left-0 hover:scale-[1.05] transition-all"
-              src={project.src}
-              alt={project.title}
-              width={300}
-              height={300}
-            />
-            <div className="absolute w-full h-1/2 bottom-0 left-0 bg-gradient-to-t from-background via-background/85 to-transparent pointer-events-none">
-              <div className="flex flex-col h-full items-start justify-end p-6">
-                <div className="text-lg text-left">{project.title}</div>
-                <div className="text-xs bg-primary text-primary-foreground rounded-lg w-fit px-2">
-                  {project.category}
-                </div>
-              </div>
-            </div>
-          </div>
-        </ResponsiveDialogTrigger>
-
-        <ResponsiveDialogContent className="md:max-w-4xl md:h-[85vh] md:!flex md:flex-col md:overflow-hidden md:p-0 md:gap-0">
-          {/* Sticky header */}
-          <div className="shrink-0 border-b border-border bg-background/80 backdrop-blur-sm px-8 py-5">
-            <div className="flex items-center justify-between gap-4">
-              <div className="flex items-center gap-4 min-w-0">
-                <h4 className="font-display text-xl md:text-2xl font-bold text-foreground tracking-tight truncate">
-                  {project.title}
-                </h4>
-                <span className="shrink-0 text-[11px] uppercase tracking-widest text-muted-foreground border border-border rounded-full px-3 py-0.5">
-                  {project.category}
-                </span>
-              </div>
-              <div className="shrink-0 flex items-center gap-4">
-                {project.github && (
-                  <Link
-                    href={project.github}
-                    target="_blank"
-                    className="text-xs text-muted-foreground hover:text-foreground transition-colors underline underline-offset-2"
-                  >
-                    Source
-                  </Link>
-                )}
-                <Link href={project.live} target="_blank">
-                  <button className="group flex items-center gap-2 bg-primary text-primary-foreground text-sm font-medium px-4 py-1.5 rounded-full hover:bg-primary/80 transition-colors">
-                    Visit
-                    <ArrowUpRight className="w-3.5 h-3.5 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 transition-transform" />
-                  </button>
-                </Link>
-              </div>
-            </div>
-          </div>
-
-          {/* Scrollable content */}
-          <ScrollArea className="flex-1" type="always" data-lenis-prevent>
-            <div className="px-8 py-8">
-              {/* Tech stack */}
-              <motion.div
-                initial={{ opacity: 0, y: 12 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.4, delay: 0.1 }}
-                className="flex flex-col md:flex-row gap-6 md:gap-10 mb-10"
-              >
-                {project.skills.frontend?.length > 0 && (
-                  <div className="flex flex-col items-center md:items-start gap-2">
-                    <span className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground font-medium">
-                      Frontend
-                    </span>
-                    <FloatingDock items={project.skills.frontend} />
-                  </div>
-                )}
-                {project.skills.backend?.length > 0 && (
-                  <div className="flex flex-col items-center md:items-start gap-2">
-                    <span className="text-[10px] uppercase tracking-[0.2em] text-muted-foreground font-medium">
-                      Backend
-                    </span>
-                    <FloatingDock items={project.skills.backend} />
-                  </div>
-                )}
-              </motion.div>
-
-              {/* Divider */}
-              <div className="h-px bg-gradient-to-r from-transparent via-border to-transparent mb-10" />
-
-              {/* Project content */}
-              <motion.div
-                initial={{ opacity: 0, y: 16 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-              >
-                {project.content}
-              </motion.div>
-            </div>
-          </ScrollArea>
-
-        </ResponsiveDialogContent>
-      </ResponsiveDialog>
+    <div className="flex flex-col md:flex-row items-center justify-start gap-3 my-3 mb-8">
+      <Link className="font-mono underline flex gap-2" rel="noopener" target="_new" href={live}>
+        <Button variant={"default"} size={"sm"}>
+          Visit Website <ArrowUpRight className="ml-3 w-5 h-5" />
+        </Button>
+      </Link>
+      {repo && (
+        <Link className="font-mono underline flex gap-2" rel="noopener" target="_new" href={repo}>
+          <Button variant={"default"} size={"sm"}>
+            Github <ArrowUpRight className="ml-3 w-5 h-5" />
+          </Button>
+        </Link>
+      )}
     </div>
   );
 };
 
-export default ProjectsSection;
+export type Project = {
+  id: string;
+  category: string;
+  title: string;
+  src: string;
+  screenshots: string[];
+  skills: { frontend: Skill[]; backend: Skill[] };
+  content: React.ReactNode | any;
+  github?: string;
+  live: string;
+};
+
+const projects: Project[] = [
+  {
+    id: "airsense",
+    category: "MLOps / AI",
+    title: "AirSense",
+    src: "",
+    screenshots: [],
+    skills: {
+      frontend: [PROJECT_SKILLS.python, PROJECT_SKILLS.fastapi, PROJECT_SKILLS.sklearn],
+      backend: [PROJECT_SKILLS.mlflow, PROJECT_SKILLS.prefect, PROJECT_SKILLS.docker],
+    },
+    live: "https://github.com/marbo786/AirSense",
+    github: "https://github.com/marbo786/AirSense",
+    get content() {
+      return (
+        <div>
+          <TypographyP className="font-mono text-2xl text-center">
+            End-to-End MLOps Pipeline for Air Quality Intelligence
+          </TypographyP>
+          <TypographyP className="font-mono">
+            Production-grade system processing 420K+ records with 40+ engineered features.
+            Achieved 86.6% accuracy in AQI classification and RMSE of 13.15 in PM2.5
+            regression. Full CI/CD automation with Docker Compose.
+          </TypographyP>
+          <ProjectsLinks live={this.live} repo={this.github} />
+          <TypographyH3 className="my-4 mt-8">ML Models</TypographyH3>
+          <p className="font-mono mb-2">
+            Multiple models evaluated for AQI classification (86.6% accuracy) and PM2.5
+            regression (RMSE 13.15) using Scikit-learn with 40+ engineered features.
+          </p>
+          <TypographyH3 className="my-4 mt-8">FastAPI Backend</TypographyH3>
+          <p className="font-mono mb-2">
+            REST API serving multiple ML models simultaneously with real-time inference
+            endpoints for both classification and regression tasks.
+          </p>
+          <TypographyH3 className="my-4 mt-8">MLOps Pipeline</TypographyH3>
+          <p className="font-mono mb-2">
+            10-task end-to-end pipeline orchestrated with Prefect — from data ingestion
+            and feature engineering to model training and deployment. MLflow tracks all
+            experiments for full reproducibility.
+          </p>
+          <TypographyH3 className="my-4 mt-8">Docker & CI/CD</TypographyH3>
+          <p className="font-mono mb-2">
+            Entire system containerized with Docker Compose. CI/CD pipelines handle
+            automated testing, linting, and deployment on every push.
+          </p>
+        </div>
+      );
+    },
+  },
+  {
+    id: "debateai",
+    category: "NLP / Multi-Agent",
+    title: "DEBATEAI",
+    src: "",
+    screenshots: [],
+    skills: {
+      frontend: [PROJECT_SKILLS.python, PROJECT_SKILLS.llm],
+      backend: [PROJECT_SKILLS.pytorch],
+    },
+    live: "https://github.com/marbo786/DEBATEAI",
+    github: "https://github.com/marbo786/DEBATEAI",
+    get content() {
+      return (
+        <div>
+          <TypographyP className="font-mono text-2xl text-center">
+            Multi-Agent Debate System with LLM-Driven Argument Generation
+          </TypographyP>
+          <TypographyP className="font-mono">
+            Combines minimax search, probabilistic belief modeling, and LLM-driven argument
+            generation in real time. Built during the Hack and Connect hackathon at
+            Netronix Society, GIKI.
+          </TypographyP>
+          <ProjectsLinks live={this.live} repo={this.github} />
+          <TypographyH3 className="my-4 mt-8">Multi-Agent Architecture</TypographyH3>
+          <p className="font-mono mb-2">
+            Agents employ minimax search to strategically plan argument sequences,
+            modeling opponent beliefs probabilistically to anticipate counterarguments.
+          </p>
+          <TypographyH3 className="my-4 mt-8">LLM Argument Generation</TypographyH3>
+          <p className="font-mono mb-2">
+            LLM backends generate fluent, structured pro and con arguments in real time,
+            grounded in semantic topic analysis and belief state modeling.
+          </p>
+          <TypographyH3 className="my-4 mt-8">Hackathon</TypographyH3>
+          <p className="font-mono mb-2">
+            Delivered under competitive time pressure at GIKI. Practical tool enabling
+            rapid multi-perspective analysis across unfamiliar debate topics.
+          </p>
+        </div>
+      );
+    },
+  },
+  {
+    id: "marcode",
+    category: "TypeScript / WASM",
+    title: "MARCODE",
+    src: "",
+    screenshots: [],
+    skills: {
+      frontend: [PROJECT_SKILLS.typescript, PROJECT_SKILLS.wasm],
+      backend: [PROJECT_SKILLS.python],
+    },
+    live: "https://github.com/marbo786/MARCODE",
+    github: "https://github.com/marbo786/MARCODE",
+    get content() {
+      return (
+        <div>
+          <TypographyP className="font-mono text-2xl text-center">
+            Hybrid Plagiarism Detection with WASM Acceleration
+          </TypographyP>
+          <TypographyP className="font-mono">
+            Leverages k-gram fingerprinting, sequence alignment, and structural similarity
+            analysis — accelerated with WebAssembly for high-performance in-browser
+            computation.
+          </TypographyP>
+          <ProjectsLinks live={this.live} repo={this.github} />
+          <TypographyH3 className="my-4 mt-8">Detection Techniques</TypographyH3>
+          <p className="font-mono mb-2">
+            Combines k-gram fingerprinting for near-duplicate detection, sequence alignment
+            for structural similarity, and WASM acceleration for real-time performance.
+          </p>
+          <TypographyH3 className="my-4 mt-8">Architecture</TypographyH3>
+          <p className="font-mono mb-2">
+            TypeScript frontend with WASM modules handling the computationally intensive
+            fingerprinting and alignment routines at near-native speed.
+          </p>
+        </div>
+      );
+    },
+  },
+  {
+    id: "lenet5",
+    category: "Deep Learning",
+    title: "LeNet-5 Digit Classifier",
+    src: "",
+    screenshots: [],
+    skills: {
+      frontend: [PROJECT_SKILLS.streamlit, PROJECT_SKILLS.python],
+      backend: [PROJECT_SKILLS.pytorch],
+    },
+    live: "https://github.com/marbo786/LENET-5",
+    github: "https://github.com/marbo786/LENET-5",
+    get content() {
+      return (
+        <div>
+          <TypographyP className="font-mono text-2xl text-center">
+            Real-Time Handwritten Digit Classification with LeNet-5
+          </TypographyP>
+          <TypographyP className="font-mono">
+            Streamlit web app with an interactive canvas — draw any digit and get
+            real-time classification from a PyTorch implementation of the classic
+            LeNet-5 CNN trained on MNIST.
+          </TypographyP>
+          <ProjectsLinks live={this.live} repo={this.github} />
+          <TypographyH3 className="my-4 mt-8">Model</TypographyH3>
+          <p className="font-mono mb-2">
+            PyTorch implementation of LeNet-5 trained on the MNIST dataset. Handles
+            preprocessing of hand-drawn canvas input for robust real-time inference.
+          </p>
+          <TypographyH3 className="my-4 mt-8">Interface</TypographyH3>
+          <p className="font-mono mb-2">
+            Streamlit canvas lets users draw digits freehand. Predictions update
+            instantly with confidence scores displayed for each class.
+          </p>
+        </div>
+      );
+    },
+  },
+  {
+    id: "ssad",
+    category: "Sports Analytics / AI",
+    title: "SSAD Sports Analytics",
+    src: "",
+    screenshots: [],
+    skills: {
+      frontend: [PROJECT_SKILLS.dash, PROJECT_SKILLS.plotly],
+      backend: [PROJECT_SKILLS.python, PROJECT_SKILLS.sklearn, PROJECT_SKILLS.llm],
+    },
+    live: "https://github.com/marbo786/SSAD",
+    github: "https://github.com/marbo786/SSAD",
+    get content() {
+      return (
+        <div>
+          <TypographyP className="font-mono text-2xl text-center">
+            ML-Powered Sports Analytics Dashboard with AI Chatbot
+          </TypographyP>
+          <TypographyP className="font-mono">
+            Interactive Dash web app combining ML-powered performance prediction,
+            dynamic Plotly visualizations, and an AI chatbot for natural language
+            data exploration.
+          </TypographyP>
+          <ProjectsLinks live={this.live} repo={this.github} />
+          <TypographyH3 className="my-4 mt-8">ML Predictions</TypographyH3>
+          <p className="font-mono mb-2">
+            Performance prediction models trained on sports data, surfaced through
+            interactive Plotly charts with drill-down capabilities.
+          </p>
+          <TypographyH3 className="my-4 mt-8">AI Chatbot</TypographyH3>
+          <p className="font-mono mb-2">
+            Natural language interface lets users query the sports dataset conversationally
+            — ask questions, get insights, no SQL required.
+          </p>
+        </div>
+      );
+    },
+  },
+  {
+    id: "research-summarizer",
+    category: "NLP / LLMs",
+    title: "Research Paper Summarizer",
+    src: "",
+    screenshots: [],
+    skills: {
+      frontend: [PROJECT_SKILLS.streamlit, PROJECT_SKILLS.python],
+      backend: [PROJECT_SKILLS.llm],
+    },
+    live: "https://github.com/marbo786/Research-paper-summarizer-",
+    github: "https://github.com/marbo786/Research-paper-summarizer-",
+    get content() {
+      return (
+        <div>
+          <TypographyP className="font-mono text-2xl text-center">
+            Model-Agnostic Research Paper Summarization Pipeline
+          </TypographyP>
+          <TypographyP className="font-mono">
+            Streamlit-based PDF ingestion and chunking pipeline with a unified API
+            abstracting multiple LLM backends — OpenAI, Cohere, and local models —
+            enabling drop-in model switching without code changes.
+          </TypographyP>
+          <ProjectsLinks live={this.live} repo={this.github} />
+          <TypographyH3 className="my-4 mt-8">PDF Pipeline</TypographyH3>
+          <p className="font-mono mb-2">
+            Ingests research PDFs, chunks them intelligently, and feeds sections
+            through the summarization interface preserving context across chunks.
+          </p>
+          <TypographyH3 className="my-4 mt-8">Model-Agnostic Design</TypographyH3>
+          <p className="font-mono mb-2">
+            Unified backend API abstracts OpenAI, Cohere, and local models behind
+            a single interface — swap models without touching application logic.
+          </p>
+        </div>
+      );
+    },
+  },
+];
+
+export default projects;
