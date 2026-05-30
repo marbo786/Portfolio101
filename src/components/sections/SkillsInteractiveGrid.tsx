@@ -156,6 +156,7 @@ export default function SkillsInteractiveGrid() {
   // Map physical keyboard keys to skills
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.repeat) return;
       const activeElement = document.activeElement;
       const isInputFocused = activeElement && (
         activeElement.tagName === "INPUT" || 
