@@ -209,18 +209,6 @@ export default function SkillsInteractiveGrid() {
           
           {/* Cyber Keyboard Frame */}
           <div className="bg-slate-900/80 dark:bg-black/70 backdrop-blur-md rounded-2xl p-6 border border-slate-700/50 shadow-2xl relative overflow-hidden">
-            
-            {/* Keyboard Status Bar */}
-            <div className="flex justify-between items-center mb-6 pb-4 border-b border-slate-800/80">
-              <div className="flex items-center gap-2 text-slate-400 font-mono text-xs">
-                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 animate-pulse" />
-                SYSTEM ACTIVE // CYBER-KEYBOARD v1.0
-              </div>
-              <div className="flex items-center gap-2 text-slate-400 font-mono text-xs">
-                <KeyboardIcon className="w-4 h-4 text-slate-500" />
-                TYPE ON YOUR PHYSICAL KEYBOARD!
-              </div>
-            </div>
 
             {/* Keyboard Rows */}
             <div className="flex flex-col gap-2.5 md:gap-3.5 w-full items-center">
@@ -246,7 +234,7 @@ export default function SkillsInteractiveGrid() {
                         onClick={() => skill && selectSkill(skill)}
                         disabled={!skill}
                         className={cn(
-                          "relative rounded-md font-mono font-bold text-base md:text-lg flex flex-col items-center justify-between transition-all duration-150 uppercase shadow-md select-none",
+                          "relative rounded-md font-mono font-bold text-base md:text-lg flex items-center justify-center p-0 transition-all duration-150 uppercase shadow-md select-none",
                           // Row key shapes and spacing
                           "w-10 h-11 md:w-12 md:h-13",
                           !skill 
@@ -267,22 +255,22 @@ export default function SkillsInteractiveGrid() {
                             : undefined
                         }}
                       >
-                        {/* Legend text */}
-                        <span className="text-[10px] md:text-xs text-slate-500 self-start pl-1 pt-0.5">
+                        {/* Legend text - very subtle top-left */}
+                        <span className="absolute top-0.5 left-1 text-[8px] text-slate-500/70 font-mono font-medium uppercase pointer-events-none">
                           {keyInfo.key}
                         </span>
 
                         {/* Technology Logo/Symbol inside the keycap */}
                         {skill ? (
-                          <div className="flex-1 flex items-center justify-center pb-1.5">
+                          <div className="w-5 h-5 md:w-6 md:h-6 flex items-center justify-center mt-1">
                             <img 
                               src={skill.icon} 
                               alt={skill.label} 
-                              className="w-5 h-5 md:w-6 md:h-6 object-contain pointer-events-none filter brightness-90 contrast-125" 
+                              className="w-full h-full object-contain pointer-events-none filter brightness-90 contrast-125" 
                             />
                           </div>
                         ) : (
-                          <span className="flex-1 flex items-center justify-center text-slate-700 pb-1.5 text-xs">
+                          <span className="text-slate-700 text-xs font-semibold mt-1">
                             {keyInfo.label}
                           </span>
                         )}
@@ -291,16 +279,6 @@ export default function SkillsInteractiveGrid() {
                   })}
                 </div>
               ))}
-            </div>
-
-            {/* Custom Legend instructions */}
-            <div className="mt-6 flex justify-between items-center text-slate-500 font-mono text-[10px] md:text-xs">
-              <span className="flex items-center gap-1">
-                <MousePointerClick className="w-3.5 h-3.5 text-slate-400" /> Hover / Click a key
-              </span>
-              <span>
-                (Active: <strong className="text-slate-300">{selectedSkill ? selectedSkill.label : "None"}</strong>)
-              </span>
             </div>
 
           </div>

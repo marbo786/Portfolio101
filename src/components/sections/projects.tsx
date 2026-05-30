@@ -372,7 +372,7 @@ const ProjectsSection = () => {
 const ProjectCard = ({ project, index }: { project: Project; index: number }) => {
   return (
     <Modal>
-      <div className="bg-slate-900/40 backdrop-blur-md border border-slate-800 hover:border-slate-700/80 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 shadow-lg hover:shadow-xl flex flex-col justify-between h-full min-h-[380px]">
+      <div className="bg-slate-950/75 backdrop-blur-xl border border-slate-800/80 hover:border-slate-750/80 rounded-2xl p-6 transition-all duration-300 hover:-translate-y-1 shadow-lg hover:shadow-xl flex flex-col justify-between h-full min-h-[380px]">
         <div className="flex flex-col gap-4">
           {/* Card Head */}
           <div className="flex justify-between items-center">
