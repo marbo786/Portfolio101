@@ -68,8 +68,8 @@ export default function RootLayout({
       </head>
       <body>
         <Providers>
-          {children}
           <Header />
+          {children}
           <Footer />
           <AppOverlays />
         </Providers>

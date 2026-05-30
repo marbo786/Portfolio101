@@ -24,7 +24,7 @@ const Header = ({ loader }: HeaderProps) => {
     <motion.header
       className={cn(
         styles.header,
-        "transition-colors delay-100 duration-500 ease-in z-[99999]"
+        "transition-colors delay-100 duration-500 ease-in z-[99999] top-0 left-0"
       )}
       style={{
         background: isActive ? "hsl(var(--background) / .96)" : "transparent",
