@@ -170,3 +170,21 @@ export const CERTIFICATIONS: Certification[] = [
       "Mastered LLM architecture and training methodologies, with focus on advanced fine-tuning techniques and model performance evaluation.",
   },
 ];
+
+// ─── THEME DISCLAIMERS ───────────────────────────────────────────────────────
+// These are the funny toast messages shown when switching light/dark mode
+
+export const themeDisclaimers = {
+  dark: [
+    "Dark mode: where bugs hide in the shadows 🐛",
+    "Welcome to the dark side. We have no bugs. Just features. 🌑",
+    "Dark mode activated. Your eyes thank you 🙏",
+    "Switching to dark mode like a true developer 🧑‍💻",
+  ],
+  light: [
+    "Light mode?! Are you okay? ☀️",
+    "Light mode activated. Please wear sunglasses 😎",
+    "Warning: This mode may expose you to reality 💡",
+    "Bold choice. Respect. 🫡",
+  ],
+};
