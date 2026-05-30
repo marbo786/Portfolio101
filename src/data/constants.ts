@@ -1,323 +1,172 @@
-// thoda zada ts ho gya idhar
-export enum SkillNames {
-  JS = "js",
-  TS = "ts",
-  HTML = "html",
-  CSS = "css",
-  REACT = "react",
-  VUE = "vue",
-  NEXTJS = "nextjs",
-  TAILWIND = "tailwind",
-  NODEJS = "nodejs",
-  EXPRESS = "express",
-  POSTGRES = "postgres",
-  MONGODB = "mongodb",
-  GIT = "git",
-  GITHUB = "github",
-  PRETTIER = "prettier",
-  NPM = "npm",
-  FIREBASE = "firebase",
-  WORDPRESS = "wordpress",
-  LINUX = "linux",
-  DOCKER = "docker",
-  NGINX = "nginx",
-  AWS = "aws",
-  GCP = "gcp",
-  VIM = "vim",
-  VERCEL = "vercel",
-}
+import React from "react";
+
+// ─── SKILL TYPES ────────────────────────────────────────────────────────────
+
+export type SkillNames =
+  | "python"
+  | "pytorch"
+  | "tensorflow"
+  | "sklearn"
+  | "fastapi"
+  | "docker"
+  | "mlflow"
+  | "prefect"
+  | "git"
+  | "cpp";
+
 export type Skill = {
-  id: number;
-  name: string;
+  name: SkillNames;
   label: string;
   shortDescription: string;
-  color: string;
-  icon: string;
+  longDescription: string;
 };
+
+// ─── SKILLS ─────────────────────────────────────────────────────────────────
+// Note: these names must match the Spline keycap object names.
+// The default keyboard uses the original author's skills — you can leave
+// the 3D labels as-is; only the hover text below changes.
+
 export const SKILLS: Record<SkillNames, Skill> = {
-  [SkillNames.JS]: {
-    id: 1,
-    name: "js",
-    label: "JavaScript",
-    shortDescription: "yeeting code into the DOM since '95, no cap! 💯🚀",
-    color: "#f0db4f",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg",
+  python: {
+    name: "python",
+    label: "Python",
+    shortDescription: "Primary language",
+    longDescription:
+      "My go-to language for everything AI — from data pipelines and model training to building production APIs with FastAPI.",
   },
-  [SkillNames.TS]: {
-    id: 2,
-    name: "ts",
-    label: "TypeScript",
-    shortDescription:
-      "JavaScript's overachieving cousin who's always flexing 💯🔒",
-    color: "#007acc",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg",
+  pytorch: {
+    name: "pytorch",
+    label: "PyTorch",
+    shortDescription: "Deep learning",
+    longDescription:
+      "Used for building and training deep learning models. Completed IBM AI Engineering and LLM specializations using PyTorch.",
   },
-  [SkillNames.HTML]: {
-    id: 3,
-    name: "html",
-    label: "HTML",
-    shortDescription: "the internet's granddad,  still bussin' fr fr! 💀🔥",
-    color: "#e34c26",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg",
+  tensorflow: {
+    name: "tensorflow",
+    label: "TensorFlow",
+    shortDescription: "ML framework",
+    longDescription:
+      "Hands-on experience building and evaluating neural networks through IBM AI Engineering specialization on Coursera.",
   },
-  [SkillNames.CSS]: {
-    id: 4,
-    name: "css",
-    label: "CSS",
-    shortDescription: "styling with the ultimate drip, no cap 💁‍♂️🔥",
-    color: "#563d7c",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/css3/css3-original.svg",
+  sklearn: {
+    name: "sklearn",
+    label: "Scikit-learn",
+    shortDescription: "Classic ML",
+    longDescription:
+      "Used for regression, classification, and clustering. Built the AirSense AQI classification model achieving 86.6% accuracy.",
   },
-  [SkillNames.REACT]: {
-    id: 5,
-    name: "react",
-    label: "React",
-    shortDescription: `"use using" 
-using use = useUsing("use")`,
-    color: "#61dafb",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg",
+  fastapi: {
+    name: "fastapi",
+    label: "FastAPI",
+    shortDescription: "API backend",
+    longDescription:
+      "Designed and deployed a FastAPI backend serving multiple ML models via real-time REST endpoints in the AirSense project.",
   },
-  [SkillNames.VUE]: {
-    id: 6,
-    name: "vue",
-    label: "Vue",
-    shortDescription:
-      "the chill pill for your frontend, it hits different! 🟢😌",
-    color: "#41b883",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vuejs/vuejs-original.svg",
-  },
-  [SkillNames.NEXTJS]: {
-    id: 7,
-    name: "nextjs",
-    label: "Next.js",
-    shortDescription:
-      "the drama queen of front-end frameworks, and we stan! 👑📜",
-    color: "#fff",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nextjs/nextjs-original.svg",
-  },
-  [SkillNames.TAILWIND]: {
-    id: 8,
-    name: "tailwind",
-    label: "Tailwind",
-    shortDescription: "utility classes hitting different fr fr 🌪️🔥",
-    color: "#38bdf8",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-plain.svg",
-  },
-  [SkillNames.NODEJS]: {
-    id: 9,
-    name: "nodejs",
-    label: "Node.js",
-    shortDescription: "JavaScript said 'sike, I'm backend now', deadass! 🔙🔚",
-    color: "#6cc24a",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg",
-  },
-  [SkillNames.EXPRESS]: {
-    id: 10,
-    name: "express",
-    label: "Express",
-    shortDescription: "middlewares go dummy hard, no cap! 🚂💨",
-    color: "#fff",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg",
-  },
-  [SkillNames.POSTGRES]: {
-    id: 11,
-    name: "postgres",
-    label: "PostgreSQL",
-    shortDescription: "SQL but make it fashion, purr 💅🐘",
-    color: "#336791",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg",
-  },
-  [SkillNames.MONGODB]: {
-    id: 12,
-    name: "mongodb",
-    label: "MongoDB",
-    shortDescription: "flexin' with that NoSQL drip, respectfully! 💪🍃",
-    color: "#336791",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg",
-  },
-  [SkillNames.GIT]: {
-    id: 13,
-    name: "git",
-    label: "Git",
-    shortDescription: "the code's personal bodyguard, no cap! 🕵️‍♂️🔄",
-    color: "#f1502f",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg",
-  },
-  [SkillNames.GITHUB]: {
-    id: 14,
-    name: "github",
-    label: "GitHub",
-    shortDescription: "sliding into those pull requests, IYKYK! 🐙",
-    color: "#000000",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/github/github-original.svg",
-  },
-  [SkillNames.PRETTIER]: {
-    id: 15,
-    name: "prettier",
-    label: "Prettier",
-    shortDescription: "making your code not a whole mess, thank u next 🧹✨",
-    color: "#f7b93a",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/prettier/prettier-original.svg",
-  },
-  [SkillNames.NPM]: {
-    id: 16,
-    name: "npm",
-    label: "NPM",
-    shortDescription: "package manager said 'I gotchu fam', period! 📦💯",
-    color: "#fff",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/npm/npm-original-wordmark.svg",
-  },
-  [SkillNames.FIREBASE]: {
-    id: 17,
-    name: "firebase",
-    label: "Firebase",
-    shortDescription:
-      "your app's ultimate wingman, but watch out, vendor lock-in vibes! 🔥👌",
-    color: "#ffca28",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg",
-  },
-  [SkillNames.WORDPRESS]: {
-    id: 18,
-    name: "wordpress",
-    label: "WordPress",
-    shortDescription: "the grandpa of CMS, still rocking that cane 🧓👴",
-    color: "#007acc",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/wordpress/wordpress-plain.svg",
-  },
-  [SkillNames.LINUX]: {
-    id: 19,
-    name: "linux",
-    label: "Linux",
-    shortDescription: "where 'chmod 777' is the ultimate flex 🔓🙌",
-    color: "#fff",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg",
-  },
-  [SkillNames.DOCKER]: {
-    id: 20,
+  docker: {
     name: "docker",
     label: "Docker",
-    shortDescription: "The best containerization! 🐳🔥",
-    color: "#2496ed",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg",
+    shortDescription: "Containerization",
+    longDescription:
+      "Containerized the AirSense system using Docker Compose, enabling reproducible deployments across environments.",
   },
-  [SkillNames.NGINX]: {
-    id: 21,
-    name: "nginx",
-    label: "NginX",
-    shortDescription: "reverse proxy go zoom zoom, sheesh! 🚗💨",
-    color: "#008000",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nginx/nginx-original.svg",
+  mlflow: {
+    name: "mlflow",
+    label: "MLflow",
+    shortDescription: "Experiment tracking",
+    longDescription:
+      "Used MLflow for experiment tracking and reproducibility in the AirSense MLOps pipeline, logging metrics across model runs.",
   },
-  [SkillNames.AWS]: {
-    id: 22,
-    name: "aws",
-    label: "AWS",
-    shortDescription:
-      "always extra, making everything more complicated, period! 🌐👨‍💻",
-    color: "#ff9900",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/aws/aws-original.svg",
+  prefect: {
+    name: "prefect",
+    label: "Prefect",
+    shortDescription: "Pipeline orchestration",
+    longDescription:
+      "Orchestrated a 10-task end-to-end training pipeline using Prefect, automating data ingestion through model deployment.",
   },
-  [SkillNames.GCP]: {
-    id: 25,
-    name: "gcp",
-    label: "Google Cloud",
-    shortDescription:
-      "cloud computing but make it Google vibes, living rent free! ☁️🔥",
-    color: "#4285f4",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/googlecloud/googlecloud-original.svg",
+  git: {
+    name: "git",
+    label: "Git",
+    shortDescription: "Version control",
+    longDescription:
+      "Used Git and GitHub for version control, CI/CD pipelines, and collaborative development across all projects.",
   },
-  [SkillNames.VIM]: {
-    id: 23,
-    name: "vim",
-    label: "Vim",
-    shortDescription: "exit? In this economy? Ight, imma head out! 🚪🏃",
-    color: "#e34c26",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vim/vim-original.svg",
-  },
-  [SkillNames.VERCEL]: {
-    id: 24,
-    name: "vercel",
-    label: "Vercel",
-    shortDescription:
-      "The triangle compony, helps you deploy and go touch grass! 🚀🌿",
-    color: "#6cc24a",
-    icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vercel/vercel-original.svg",
+  cpp: {
+    name: "cpp",
+    label: "C++",
+    shortDescription: "Systems programming",
+    longDescription:
+      "Studied C++ as part of my CS curriculum at GIKI, building foundational knowledge in memory management and algorithms.",
   },
 };
 
+// ─── EXPERIENCE ─────────────────────────────────────────────────────────────
+
 export type Experience = {
-  id: number;
-  startDate: string;
-  endDate: string;
   title: string;
   company: string;
+  period: string;
   description: string[];
-  skills: SkillNames[];
+  skills: string[];
 };
 
 export const EXPERIENCE: Experience[] = [
   {
-    id: 1,
-    startDate: "Dec 2024",
-    endDate: "Present",
-    title: "Full Stack Developer",
-    company: "OmniNexus Sdn Bhd",
+    title: "AI/ML Engineer",
+    company: "AirSense — Applied AI Solutions",
+    period: "2024 – Present",
     description: [
-      "Built a custom image editor from scratch, cutting $4.8k/year in SaaS costs.",
-      "Architected async job queues processing 1k+ AI tasks daily with bulletproof reliability.",
-      "Optimized media delivery pipeline, slashing asset load times by 40%.",
-      "Shipped high-impact features end-to-end from requirements to production.",
+      "Built a production-grade air quality intelligence system processing 420K+ records with 40+ engineered features.",
+      "Developed and evaluated multiple ML models — 86.6% accuracy in AQI classification, RMSE of 13.15 in PM2.5 regression.",
+      "Designed and deployed a FastAPI backend serving multiple ML models via real-time REST endpoints.",
+      "Orchestrated a 10-task end-to-end training pipeline using Prefect with MLflow experiment tracking.",
+      "Containerized the system using Docker Compose and implemented CI/CD pipelines for automated testing and deployment.",
     ],
-    skills: [
-      SkillNames.NEXTJS,
-      SkillNames.TS,
-      SkillNames.REACT,
-      SkillNames.NODEJS,
-      SkillNames.POSTGRES,
-      SkillNames.MONGODB,
-      SkillNames.DOCKER,
-      SkillNames.GCP,
-    ],
+    skills: ["Python", "FastAPI", "MLflow", "Prefect", "Docker", "Scikit-learn"],
   },
   {
-    id: 2,
-    startDate: "Apr 2022",
-    endDate: "Dec 2024",
-    title: "Freelance Full Stack Developer",
-    company: "Self-employed",
+    title: "NLP Developer",
+    company: "Debate AI — Hack and Connect, Netronix Society GIKI",
+    period: "2024",
     description: [
-      "Transformed chaotic Excel sheets into polished internal tools for various clients.",
-      "Shipped dashboards and custom CMS platforms tailored to each client's workflow.",
-      "Automated repetitive processes, improving efficiency and reducing human error.",
-      "Focused on clean, maintainable code and interfaces that users actually enjoy.",
+      "Developed an AI-driven NLP system to analyze debate topics and extract semantic context.",
+      "Automated structured pro and con argument generation using ML-based text analysis techniques.",
+      "Delivered a practical tool enabling efficient multi-perspective analysis in a competitive hackathon environment.",
     ],
-    skills: [
-      SkillNames.REACT,
-      SkillNames.VUE,
-      SkillNames.NODEJS,
-      SkillNames.EXPRESS,
-      SkillNames.MONGODB,
-      SkillNames.POSTGRES,
-      SkillNames.TAILWIND,
-      SkillNames.WORDPRESS,
-    ],
+    skills: ["Python", "NLP", "Machine Learning", "Text Analysis"],
   },
 ];
 
-export const themeDisclaimers = {
-  light: [
-    "Warning: Light mode emits a gazillion lumens of pure radiance!",
-    "Caution: Light mode ahead! Please don't try this at home.",
-    "Only trained professionals can handle this much brightness. Proceed with sunglasses!",
-    "Brace yourself! Light mode is about to make everything shine brighter than your future.",
-    "Flipping the switch to light mode... Are you sure your eyes are ready for this?",
-  ],
-  dark: [
-    "Light mode? I thought you went insane... but welcome back to the dark side!",
-    "Switching to dark mode... How was life on the bright side?",
-    "Dark mode activated! Thanks you from the bottom of my heart, and my eyes too.",
-    "Welcome back to the shadows. How was life out there in the light?",
-    "Dark mode on! Finally, someone who understands true sophistication.",
-  ],
+// ─── CERTIFICATIONS ──────────────────────────────────────────────────────────
+
+export type Certification = {
+  title: string;
+  issuer: string;
+  description: string;
 };
 
+export const CERTIFICATIONS: Certification[] = [
+  {
+    title: "AI Fluency: Framework and Foundations",
+    issuer: "Anthropic",
+    description:
+      "Foundational knowledge in generative AI principles, ethical considerations, and practical applications of large language models.",
+  },
+  {
+    title: "IBM AI Engineering",
+    issuer: "Coursera",
+    description:
+      "Comprehensive specialization in deep learning, ML algorithms, and engineering scalable AI models using PyTorch and TensorFlow.",
+  },
+  {
+    title: "Machine Learning with Python",
+    issuer: "Coursera",
+    description:
+      "Hands-on experience building, evaluating, and optimizing ML models for regression, classification, and clustering using scikit-learn.",
+  },
+  {
+    title: "Generative AI Engineering with Transformers & LLMs",
+    issuer: "Coursera",
+    description:
+      "Mastered LLM architecture and training methodologies, with focus on advanced fine-tuning techniques and model performance evaluation.",
+  },
+];
