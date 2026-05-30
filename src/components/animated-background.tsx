@@ -87,8 +87,8 @@ const AnimatedBackground = () => {
         playPressSound();
         setSelectedSkill(skill);
         selectedSkillRef.current = skill;
-        splineApp.setVariable("heading", skill.label);
-        splineApp.setVariable("desc", skill.shortDescription);
+        splineApp.setVariable("heading", "");
+        splineApp.setVariable("desc", "");
       }
     });
     splineApp.addEventListener("mouseHover", handleMouseHover);
@@ -296,8 +296,8 @@ const AnimatedBackground = () => {
         selectedSkillRef.current = skill;
 
         // Set Spline text readouts
-        splineApp.setVariable("heading", skill.label);
-        splineApp.setVariable("desc", skill.shortDescription);
+        splineApp.setVariable("heading", "");
+        splineApp.setVariable("desc", "");
 
         // Physically depress the corresponding 3D keycap
         const keycap = splineApp.findObjectByName(threeDKey);
@@ -356,8 +356,8 @@ const AnimatedBackground = () => {
 
   useEffect(() => {
     if (!selectedSkill || !splineApp) return;
-    splineApp.setVariable("heading", selectedSkill.label);
-    splineApp.setVariable("desc", selectedSkill.shortDescription);
+    splineApp.setVariable("heading", "");
+    splineApp.setVariable("desc", "");
   }, [selectedSkill]);
 
   // Handle rotation and teardown animations based on active section
